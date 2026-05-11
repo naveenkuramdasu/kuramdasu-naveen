@@ -36,4 +36,5 @@ A modern, responsive, and animated Full Stack Developer portfolio built to showc
 ## 📬 Contact
 📧 naveenkuramdasu333@gmail.com
 
+my portfolio: https://naveenkuramdasu.github.io/kuramdasu-naveen/
 > “Code. Learn. Build. Repeat.”
