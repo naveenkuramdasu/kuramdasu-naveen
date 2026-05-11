@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naveen Kuramdasu | Full Stack Developer & Problem Solver</title>
+  <meta name="description" content="Portfolio of Naveen Kuramdasu — Full Stack Developer, Problem Solver, building scalable web applications with modern technologies." />
+  <meta name="keywords" content="Naveen Kuramdasu, Full Stack Developer, React, Node.js, Portfolio" />
+  <meta name="author" content="Naveen Kuramdasu" />
+  <meta property="og:title" content="Naveen Kuramdasu | Full Stack Developer" />
+  <meta property="og:description" content="Passionate Full Stack Developer & Problem Solver" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://naveenkuramdasu.dev" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
+          colors: { neon: { blue: '#00d4ff', purple: '#7c3aed', pink: '#ec4899' }, dark: { 900: '#050510', 800: '#0a0a1a', 700: '#0f0f2a', 600: '#151535' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { cursor: none; }
+    body { background: #050510; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    @media (max-width: 768px) { html { cursor: auto; } body { cursor: auto; } .custom-cursor { display: none !important; } }
+    .custom-cursor { position: fixed; top: 0; left: 0; width: 20px; height: 20px; border: 2px solid #00d4ff; border-radius: 50%; pointer-events: none; z-index: 99999; transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease; mix-blend-mode: difference; }
+    .custom-cursor.hover { transform: scale(2.5); background: rgba(0,212,255,0.15); border-color: #7c3aed; }
+    .cursor-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #00d4ff; border-radius: 50%; pointer-events: none; z-index: 99999; }
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #00d4ff, #7c3aed, #ec4899); z-index: 10001; transform-origin: left; }
+    .glass { background: rgba(15, 15, 42, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+    .glass-strong { background: rgba(15, 15, 42, 0.8); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255,255,255,0.1); }
+    .neon-text { text-shadow: 0 0 40px rgba(0,212,255,0.3), 0 0 80px rgba(0,212,255,0.1); }
+    .gradient-border { position: relative; }
+    .gradient-border::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, #00d4ff, #7c3aed, #ec4899, #00d4ff); background-size: 300% 300%; animation: gradientShift 4s ease infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.5; transition: opacity 0.5s; }
+    .gradient-border:hover::before { opacity: 1; }
+    @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .typing-cursor { display: inline-block; width: 3px; height: 1em; background: #00d4ff; margin-left: 4px; animation: blink 1s step-end infinite; vertical-align: text-bottom; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+    .float { animation: float 6s ease-in-out infinite; }
+    .float-delay-1 { animation: float 6s ease-in-out 1s infinite; }
+    .float-delay-2 { animation: float 6s ease-in-out 2s infinite; }
+    .skill-progress { position: relative; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+    .skill-progress-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #00d4ff, #7c3aed); transform: scaleX(0); transform-origin: left; transition: transform 1.5s cubic-bezier(0.4,0,0.2,1); }
+    .skill-progress-bar.animated { transform: scaleX(1); }
+    .magnetic-btn { transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+    #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .grid-bg { background-image: linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+    .reveal { opacity: 0; transform: translateY(60px); }
+    .project-card { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), box-shadow 0.5s; }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(0,212,255,0.1), 0 0 0 1px rgba(0,212,255,0.1); }
+    .project-card .project-img { transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+    .project-card:hover .project-img { transform: scale(1.08); }
+    .project-card .project-overlay { opacity: 0; transition: opacity 0.5s; }
+    .project-card:hover .project-overlay { opacity: 1; }
+    .mobile-menu { transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .mobile-menu.open { transform: translateX(0); }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 50%; width: 0; height: 2px; background: linear-gradient(90deg, #00d4ff, #7c3aed); transition: width 0.3s, left 0.3s; border-radius: 1px; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; left: 0; }
+    .toast { transform: translateY(100px); opacity: 0; transition: all 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050510; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00d4ff, #7c3aed); border-radius: 3px; }
+    .stat-card { transition: transform 0.4s, box-shadow 0.4s; }
+    .stat-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 15px 40px rgba(0,212,255,0.1); }
+    ::selection { background: rgba(0,212,255,0.3); color: #fff; }
+    .form-input:focus { box-shadow: 0 0 0 2px rgba(0,212,255,0.2), 0 0 20px rgba(0,212,255,0.05); }
+    .exp-card { transition: transform 0.4s, border-color 0.4s; }
+    .exp-card:hover { transform: translateX(8px); border-color: rgba(0,212,255,0.3); }
+    .profile-img-container { position: relative; }
+    .profile-img-container::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, transparent 40%, rgba(0,212,255,0.08) 100%); pointer-events: none; }
+  </style>
+</head>
+<body class="grid-bg">
+
+  <canvas id="particles"></canvas>
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-[10000] transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="#hero" class="relative z-50"><span class="font-display text-2xl font-bold bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent">&lt;NK/&gt;</span></a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+          <a href="#skills" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Skills</a>
+          <a href="#projects" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Projects</a>
+          <a href="#experience" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Experience</a>
+          <a href="#contact" class="magnetic-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/20 transition-all duration-300 hover:scale-105">
+            <span class="iconify" data-icon="mdi:email-outline" data-width="16"></span> Contact
+          </a>
+        </div>
+        <button id="menuBtn" class="md:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 group">
+          <span class="hamburger-line w-6 h-0.5 bg-white rounded transition-all duration-300 origin-center"></span>
+          <span class="hamburger-line w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+          <span class="hamburger-line w-4 h-0.5 bg-white rounded transition-all duration-300 origin-center group-hover:w-6"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[9999] glass-strong flex flex-col items-center justify-center gap-8">
+    <a href="#about" class="mobile-link text-3xl font-display font-bold text-white hover:text-neon-blue transition-colors">About</a>
+    <a href="#skills" class="mobile-link text-3xl font-display font-bold text-white hover:text-neon-blue transition-colors">Skills</a>
+    <a href="#projects" class="mobile-link text-3xl font-display font-bold text-white hover:text-neon-blue transition-colors">Projects</a>
+    <a href="#experience" class="mobile-link text-3xl font-display font-bold text-white hover:text-neon-blue transition-colors">Experience</a>
+    <a href="#contact" class="mobile-link text-3xl font-display font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Contact</a>
+    <div class="flex gap-4 mt-8">
+      <a href="https://github.com/" target="_blank" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neon-blue transition-all"><span class="iconify" data-icon="mdi:github" data-width="24"></span></a>
+      <a href="https://linkedin.com/" target="_blank" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neon-blue transition-all"><span class="iconify" data-icon="mdi:linkedin" data-width="24"></span></a>
+      <a href="mailto:naveenkuramdasu333@gmail.com" class="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neon-blue transition-all"><span class="iconify" data-icon="mdi:gmail" data-width="24"></span></a>
+    </div>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute top-1/4 -left-32 w-96 h-96 bg-neon-blue/10 rounded-full blur-[128px] float"></div>
+    <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-neon-purple/10 rounded-full blur-[128px] float-delay-1"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-blue/5 rounded-full blur-[200px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+      <div class="flex-1 text-center lg:text-left">
+        <div class="hero-anim" style="opacity:0; transform:translateY(40px);">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold tracking-wider uppercase text-neon-blue mb-8">
+            <span class="w-2 h-2 rounded-full bg-neon-blue animate-pulse"></span>
+            Available for Opportunities
+          </div>
+        </div>
+        <h1 class="hero-anim font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-6" style="opacity:0; transform:translateY(40px);">
+          <span class="text-white">Hi, I'm</span><br />
+          <span class="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent neon-text">Naveen Kuramdasu</span>
+        </h1>
+        <div class="hero-anim mb-6" style="opacity:0; transform:translateY(40px);">
+          <p class="text-xl sm:text-2xl md:text-3xl font-display font-medium text-gray-300">
+            <span id="typingText"></span><span class="typing-cursor"></span>
+          </p>
+        </div>
+        <p class="hero-anim text-base sm:text-lg text-gray-500 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed" style="opacity:0; transform:translateY(40px);">
+          Crafting scalable full-stack applications with clean code, strong DSA foundations, and a passion for solving complex problems.
+        </p>
+        <div class="hero-anim flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-10" style="opacity:0; transform:translateY(40px);">
+          <a href="#projects" class="magnetic-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-dark-900 bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-xl hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
+            <span class="iconify" data-icon="mdi:rocket-launch-outline" data-width="18"></span> View Projects
+          </a>
+          <a href="#contact" class="magnetic-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-neon-blue border border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 hover:scale-105">
+            <span class="iconify" data-icon="mdi:message-outline" data-width="18"></span> Contact Me
+          </a>
+        </div>
+        <div class="hero-anim flex items-center justify-center lg:justify-start gap-4" style="opacity:0; transform:translateY(40px);">
+          <a href="https://github.com/" target="_blank" class="w-11 h-11 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300 hover:scale-110"><span class="iconify" data-icon="mdi:github" data-width="22"></span></a>
+          <a href="https://linkedin.com/" target="_blank" class="w-11 h-11 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300 hover:scale-110"><span class="iconify" data-icon="mdi:linkedin" data-width="22"></span></a>
+          <a href="mailto:naveenkuramdasu333@gmail.com" class="w-11 h-11 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300 hover:scale-110"><span class="iconify" data-icon="mdi:gmail" data-width="22"></span></a>
+        </div>
+      </div>
+
+      <div class="hero-anim flex-shrink-0 relative" style="opacity:0; transform:translateY(40px) scale(0.9);">
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+          <div class="absolute inset-0 rounded-full border border-neon-blue/20 animate-spin" style="animation-duration:20s;"></div>
+          <div class="absolute inset-3 rounded-full border border-neon-purple/15 animate-spin" style="animation-duration:15s; animation-direction:reverse;"></div>
+          <div class="absolute inset-6 rounded-full border border-neon-pink/10 animate-spin" style="animation-duration:25s;"></div>
+          <div class="absolute inset-0 rounded-full bg-gradient-to-br from-neon-blue/20 via-neon-purple/10 to-neon-pink/20 blur-xl"></div>
+          <div class="absolute inset-8 rounded-full overflow-hidden gradient-border profile-img-container">
+            <img src="https://z-cdn-media.chatglm.cn/files/51fc885a-3a3a-4575-b271-84e7f6643815.jpeg?auth_key=1878175514-d0af5b69c41646439d7365e7cabfbc35-0-73744ad59e0127395a1b3d46e8765f96" alt="Naveen Kuramdasu" class="w-full h-full object-cover object-top" />
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/30 to-transparent"></div>
+          </div>
+          <div class="absolute -top-2 -right-2 float glass rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold text-neon-blue"><span class="iconify" data-icon="mdi:code-braces" data-width="16"></span> Full Stack</div>
+          <div class="absolute -bottom-2 -left-2 float-delay-1 glass rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold text-neon-purple"><span class="iconify" data-icon="mdi:brain" data-width="16"></span> DSA</div>
+          <div class="absolute top-1/2 -right-6 float-delay-2 glass rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold text-neon-pink"><span class="iconify" data-icon="mdi:lightning-bolt" data-width="16"></span> Fast</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-anim" style="opacity:0; transform:translateY(20px);">
+      <span class="text-xs text-gray-600 tracking-widest uppercase">Scroll</span>
+      <div class="w-6 h-10 rounded-full border-2 border-gray-700 flex items-start justify-center p-1.5">
+        <div class="w-1.5 h-3 rounded-full bg-neon-blue animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-blue/20 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-20">
+        <p class="text-xs font-bold tracking-[0.3em] uppercase text-neon-blue mb-4">Get To Know Me</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">About <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Me</span></h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal relative">
+          <div class="relative rounded-3xl overflow-hidden gradient-border">
+            <img src="https://z-cdn-media.chatglm.cn/files/51fc885a-3a3a-4575-b271-84e7f6643815.jpeg?auth_key=1878175514-d0af5b69c41646439d7365e7cabfbc35-0-73744ad59e0127395a1b3d46e8765f96" alt="Naveen Kuramdasu" class="w-full h-80 sm:h-96 object-cover object-top" />
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-dark-900/20 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <div class="glass rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center"><span class="iconify text-white" data-icon="mdi:code-tags" data-width="24"></span></div>
+                <div><p class="text-sm font-bold text-white">2+ Years of Learning</p><p class="text-xs text-gray-400">Building & Shipping Projects</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="text-lg text-gray-300 leading-relaxed mb-6">I'm a passionate <span class="text-neon-blue font-semibold">Full Stack Developer</span> with a deep love for building responsive, scalable web applications. My journey in tech is driven by curiosity and an unwavering commitment to <span class="text-neon-purple font-semibold">problem-solving</span>.</p>
+          <p class="text-base text-gray-500 leading-relaxed mb-8">With strong foundations in Data Structures & Algorithms, I approach every challenge methodically. I thrive in collaborative environments, enjoy hackathons, and constantly push myself to learn emerging technologies.</p>
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-lg bg-neon-blue/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="iconify text-neon-blue" data-icon="mdi:check-bold" data-width="16"></span></div><p class="text-sm text-gray-400">Full Stack Development</p></div>
+            <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-lg bg-neon-purple/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="iconify text-neon-purple" data-icon="mdi:check-bold" data-width="16"></span></div><p class="text-sm text-gray-400">DSA & Problem Solving</p></div>
+            <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-lg bg-neon-pink/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="iconify text-neon-pink" data-icon="mdi:check-bold" data-width="16"></span></div><p class="text-sm text-gray-400">Responsive & Scalable Apps</p></div>
+            <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-lg bg-neon-blue/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="iconify text-neon-blue" data-icon="mdi:check-bold" data-width="16"></span></div><p class="text-sm text-gray-400">Continuous Learning</p></div>
+          </div>
+          <a href="#contact" class="magnetic-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-xl hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">Let's Connect <span class="iconify" data-icon="mdi:arrow-right" data-width="18"></span></a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-20">
+        <div class="reveal stat-card glass rounded-2xl p-6 text-center gradient-border"><p class="font-display text-3xl sm:text-4xl font-bold text-white mb-1"><span class="counter" data-target="10">0</span>+</p><p class="text-sm text-gray-500">Projects Built</p></div>
+        <div class="reveal stat-card glass rounded-2xl p-6 text-center gradient-border"><p class="font-display text-3xl sm:text-4xl font-bold text-white mb-1"><span class="counter" data-target="15">0</span>+</p><p class="text-sm text-gray-500">Tech Skills</p></div>
+        <div class="reveal stat-card glass rounded-2xl p-6 text-center gradient-border"><p class="font-display text-3xl sm:text-4xl font-bold text-white mb-1"><span class="counter" data-target="2">0</span>+</p><p class="text-sm text-gray-500">Hackathons</p></div>
+        <div class="reveal stat-card glass rounded-2xl p-6 text-center gradient-border"><p class="font-display text-3xl sm:text-4xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent mb-1">∞</p><p class="text-sm text-gray-500">Learning Journey</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS ==================== -->
+  <section id="skills" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-purple/20 to-transparent"></div>
+    <div class="absolute bottom-1/3 right-0 w-80 h-80 bg-neon-purple/5 rounded-full blur-[120px]"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-20">
+        <p class="text-xs font-bold tracking-[0.3em] uppercase text-neon-purple mb-4">What I Work With</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">My <span class="bg-gradient-to-r from-neon-purple to-neon-pink bg-clip-text text-transparent">Skills</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="reveal glass rounded-2xl p-6 gradient-border group">
+          <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 rounded-xl bg-neon-blue/10 flex items-center justify-center group-hover:bg-neon-blue/20 transition-colors"><span class="iconify text-neon-blue" data-icon="mdi:palette-outline" data-width="22"></span></div><h3 class="font-display text-lg font-bold text-white">Frontend</h3></div>
+          <div class="space-y-4">
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">HTML</span><span class="text-neon-blue font-semibold">95%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.95"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">CSS</span><span class="text-neon-blue font-semibold">90%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.9"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">JavaScript</span><span class="text-neon-blue font-semibold">88%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.88"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">React</span><span class="text-neon-blue font-semibold">85%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.85"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Tailwind CSS</span><span class="text-neon-blue font-semibold">90%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.9"></div></div></div>
+          </div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6 gradient-border group">
+          <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 rounded-xl bg-neon-purple/10 flex items-center justify-center group-hover:bg-neon-purple/20 transition-colors"><span class="iconify text-neon-purple" data-icon="mdi:server-outline" data-width="22"></span></div><h3 class="font-display text-lg font-bold text-white">Backend</h3></div>
+          <div class="space-y-4">
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Node.js</span><span class="text-neon-purple font-semibold">85%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.85"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Express.js</span><span class="text-neon-purple font-semibold">82%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.82"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">REST APIs</span><span class="text-neon-purple font-semibold">88%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.88"></div></div></div>
+          </div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6 gradient-border group">
+          <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 rounded-xl bg-neon-pink/10 flex items-center justify-center group-hover:bg-neon-pink/20 transition-colors"><span class="iconify text-neon-pink" data-icon="mdi:database-outline" data-width="22"></span></div><h3 class="font-display text-lg font-bold text-white">Database</h3></div>
+          <div class="space-y-4">
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">MongoDB</span><span class="text-neon-pink font-semibold">85%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.85"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">MySQL</span><span class="text-neon-pink font-semibold">80%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.8"></div></div></div>
+          </div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6 gradient-border group">
+          <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center group-hover:bg-green-500/20 transition-colors"><span class="iconify text-green-400" data-icon="mdi:code-braces-box" data-width="22"></span></div><h3 class="font-display text-lg font-bold text-white">Languages</h3></div>
+          <div class="space-y-4">
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Java</span><span class="text-green-400 font-semibold">88%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.88"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Python</span><span class="text-green-400 font-semibold">82%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.82"></div></div></div>
+            <div class="skill-item"><div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">C</span><span class="text-green-400 font-semibold">78%</span></div><div class="skill-progress"><div class="skill-progress-bar" data-width="0.78"></div></div></div>
+          </div>
+        </div>
+        <div class="reveal glass rounded-2xl p-6 gradient-border group md:col-span-2 lg:col-span-2">
+          <div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center group-hover:bg-amber-500/20 transition-colors"><span class="iconify text-amber-400" data-icon="mdi:star-four-points-outline" data-width="22"></span></div><h3 class="font-display text-lg font-bold text-white">Other Skills</h3></div>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-neon-blue hover:border-neon-blue/30 transition-all cursor-default">GitHub</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-neon-blue hover:border-neon-blue/30 transition-all cursor-default">REST APIs</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-neon-purple hover:border-neon-purple/30 transition-all cursor-default">DSA</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-neon-pink hover:border-neon-pink/30 transition-all cursor-default">OOP</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-amber-400 hover:border-amber-400/30 transition-all cursor-default">DBMS</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-green-400 hover:border-green-400/30 transition-all cursor-default">Git & Version Control</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-neon-blue hover:border-neon-blue/30 transition-all cursor-default">Problem Solving</span>
+            <span class="px-4 py-2 rounded-full glass text-sm text-gray-300 hover:text-neon-purple hover:border-neon-purple/30 transition-all cursor-default">Team Collaboration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECTS ==================== -->
+  <section id="projects" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-blue/20 to-transparent"></div>
+    <div class="absolute top-1/3 left-0 w-96 h-96 bg-neon-blue/5 rounded-full blur-[150px]"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-20">
+        <p class="text-xs font-bold tracking-[0.3em] uppercase text-neon-blue mb-4">What I've Built</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">Featured <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Projects</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="reveal project-card glass rounded-3xl overflow-hidden gradient-border">
+          <div class="relative h-56 sm:h-64 overflow-hidden">
+            <img src="https://z-cdn-media.chatglm.cn/files/ac014cc3-b1da-470b-a70b-b095613dcd69.jpeg?auth_key=1878175514-f66c537a4b074167a11b3d9ada72cc14-0-fbc21a15787dad5614fd9dbbb95adeb2" alt="MediScope AI" class="project-img w-full h-full object-cover" />
+            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent flex items-end p-6"><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:open-in-new" data-width="20"></span></a></div></div>
+            <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-neon-blue/20 backdrop-blur text-xs font-bold text-neon-blue">Featured</div>
+          </div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-white mb-2">MediScope AI — Diagnostic Neural Network</h3><p class="text-sm text-gray-400 mb-4 leading-relaxed">AI-powered medical diagnostic platform with Brain Tumor, Pneumonia, Tuberculosis, Kidney, Skin Cancer, and Glaucoma detection modules with integrated ASK AI assistant.</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full bg-neon-blue/10 text-xs font-semibold text-neon-blue">Python</span><span class="px-3 py-1 rounded-full bg-neon-purple/10 text-xs font-semibold text-neon-purple">Deep Learning</span><span class="px-3 py-1 rounded-full bg-neon-pink/10 text-xs font-semibold text-neon-pink">TensorFlow</span><span class="px-3 py-1 rounded-full bg-green-500/10 text-xs font-semibold text-green-400">Flask</span></div></div>
+        </div>
+        <div class="reveal project-card glass rounded-3xl overflow-hidden gradient-border">
+          <div class="relative h-56 sm:h-64 overflow-hidden">
+            <img src="https://z-cdn-media.chatglm.cn/files/bccc96de-9da3-4513-a3e8-4949fbd1cd00.jpeg?auth_key=1878175514-86017767744f449d92334aa8e225109f-0-f2d00286978203599843e4b5793ce891" alt="Waste to Electricity" class="project-img w-full h-full object-cover" />
+            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent flex items-end p-6"><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:open-in-new" data-width="20"></span></a></div></div>
+            <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-500/20 backdrop-blur text-xs font-bold text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> LIVE</div>
+          </div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-white mb-2">Waste-to-Electricity — Smart Monitoring System</h3><p class="text-sm text-gray-400 mb-4 leading-relaxed">IoT-based monitoring system converting waste into electricity with real-time power output tracking, backup time calculation, and device compatibility analysis.</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full bg-neon-blue/10 text-xs font-semibold text-neon-blue">Python</span><span class="px-3 py-1 rounded-full bg-neon-purple/10 text-xs font-semibold text-neon-purple">IoT</span><span class="px-3 py-1 rounded-full bg-neon-pink/10 text-xs font-semibold text-neon-pink">Real-time</span><span class="px-3 py-1 rounded-full bg-amber-500/10 text-xs font-semibold text-amber-400">Sensors</span></div></div>
+        </div>
+        <div class="reveal project-card glass rounded-3xl overflow-hidden gradient-border">
+          <div class="relative h-56 sm:h-64 overflow-hidden">
+            <img src="https://picsum.photos/seed/weatherapp2025nk/800/500.jpg" alt="Weather App" class="project-img w-full h-full object-cover" />
+            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent flex items-end p-6"><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:open-in-new" data-width="20"></span></a></div></div>
+          </div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-white mb-2">Weather App</h3><p class="text-sm text-gray-400 mb-4 leading-relaxed">Sleek weather application with real-time data, location search, and beautiful visualizations for temperature, humidity, wind speed, and forecasts.</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full bg-neon-blue/10 text-xs font-semibold text-neon-blue">JavaScript</span><span class="px-3 py-1 rounded-full bg-neon-purple/10 text-xs font-semibold text-neon-purple">REST API</span><span class="px-3 py-1 rounded-full bg-neon-pink/10 text-xs font-semibold text-neon-pink">CSS</span></div></div>
+        </div>
+        <div class="reveal project-card glass rounded-3xl overflow-hidden gradient-border">
+          <div class="relative h-56 sm:h-64 overflow-hidden">
+            <img src="https://picsum.photos/seed/portfolio2025nk/800/500.jpg" alt="Portfolio" class="project-img w-full h-full object-cover" />
+            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent flex items-end p-6"><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a><a href="#" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-neon-blue transition-colors"><span class="iconify" data-icon="mdi:open-in-new" data-width="20"></span></a></div></div>
+          </div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-white mb-2">Portfolio Website</h3><p class="text-sm text-gray-400 mb-4 leading-relaxed">Modern animated portfolio with glassmorphism, GSAP scroll animations, particle backgrounds, custom cursor, and futuristic dark aesthetic.</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full bg-neon-blue/10 text-xs font-semibold text-neon-blue">HTML</span><span class="px-3 py-1 rounded-full bg-neon-purple/10 text-xs font-semibold text-neon-purple">Tailwind CSS</span><span class="px-3 py-1 rounded-full bg-neon-pink/10 text-xs font-semibold text-neon-pink">GSAP</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EXPERIENCE ==================== -->
+  <section id="experience" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-purple/20 to-transparent"></div>
+    <div class="absolute bottom-1/4 left-1/4 w-80 h-80 bg-neon-purple/5 rounded-full blur-[120px]"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-20">
+        <p class="text-xs font-bold tracking-[0.3em] uppercase text-neon-purple mb-4">My Journey</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">Experience & <span class="bg-gradient-to-r from-neon-purple to-neon-pink bg-clip-text text-transparent">Achievements</span></h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="reveal exp-card glass rounded-2xl p-6 sm:p-8 border-l-4 border-neon-blue">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4"><div><h3 class="font-display text-xl font-bold text-white">VISION-X 2K26 — National Level Hackathon</h3><p class="text-sm text-neon-blue font-semibold mt-1">Team CURANOVA</p></div><span class="px-4 py-1.5 rounded-full bg-neon-blue/10 text-xs font-bold text-neon-blue whitespace-nowrap">Hackathon</span></div>
+          <p class="text-sm text-gray-400 leading-relaxed">Participated in a prestigious national-level hackathon, collaborating with a team to build an innovative AI-based health analysis and hospital recommendation system under tight deadlines.</p>
+        </div>
+        <div class="reveal exp-card glass rounded-2xl p-6 sm:p-8 border-l-4 border-neon-purple">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4"><h3 class="font-display text-xl font-bold text-white">MediScope AI — Built for Impact</h3><span class="px-4 py-1.5 rounded-full bg-neon-purple/10 text-xs font-bold text-neon-purple whitespace-nowrap">Project</span></div>
+          <p class="text-sm text-gray-400 leading-relaxed">Developed a comprehensive AI medical diagnostic platform with 6+ disease detection modules using deep learning neural networks.</p>
+        </div>
+        <div class="reveal exp-card glass rounded-2xl p-6 sm:p-8 border-l-4 border-green-400">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4"><h3 class="font-display text-xl font-bold text-white">Waste-to-Electricity — IoT Innovation</h3><span class="px-4 py-1.5 rounded-full bg-green-500/10 text-xs font-bold text-green-400 whitespace-nowrap">IoT Project</span></div>
+          <p class="text-sm text-gray-400 leading-relaxed">Engineered a smart monitoring system that converts waste into electricity with real-time power output tracking and device compatibility analysis.</p>
+        </div>
+        <div class="reveal exp-card glass rounded-2xl p-6 sm:p-8 border-l-4 border-neon-pink">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4"><h3 class="font-display text-xl font-bold text-white">Quick Learner & Team Collaborator</h3><span class="px-4 py-1.5 rounded-full bg-neon-pink/10 text-xs font-bold text-neon-pink whitespace-nowrap">Soft Skills</span></div>
+          <p class="text-sm text-gray-400 leading-relaxed">Adaptable to new technologies and frameworks rapidly. Excellent communication skills with proven ability to work effectively in cross-functional teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-blue/20 to-transparent"></div>
+    <div class="absolute top-1/2 right-0 w-96 h-96 bg-neon-blue/5 rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-neon-purple/5 rounded-full blur-[120px]"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-20">
+        <p class="text-xs font-bold tracking-[0.3em] uppercase text-neon-blue mb-4">Let's Work Together</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">Get In <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Touch</span></h2>
+      </div>
+      <div class="grid lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="reveal glass rounded-2xl p-6 gradient-border group"><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-neon-blue/10 flex items-center justify-center flex-shrink-0 group-hover:bg-neon-blue/20 transition-colors"><span class="iconify text-neon-blue" data-icon="mdi:email-outline" data-width="24"></span></div><div><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Email</p><a href="mailto:naveenkuramdasu333@gmail.com" class="text-sm text-gray-300 hover:text-neon-blue transition-colors break-all">naveenkuramdasu333@gmail.com</a></div></div></div>
+          <div class="reveal glass rounded-2xl p-6 gradient-border group"><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-neon-purple/10 flex items-center justify-center flex-shrink-0 group-hover:bg-neon-purple/20 transition-colors"><span class="iconify text-neon-purple" data-icon="mdi:phone-outline" data-width="24"></span></div><div><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Phone</p><a href="tel:+919014366278" class="text-sm text-gray-300 hover:text-neon-purple transition-colors">+91 9014366278</a></div></div></div>
+          <div class="reveal glass rounded-2xl p-6 gradient-border group"><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-neon-pink/10 flex items-center justify-center flex-shrink-0 group-hover:bg-neon-pink/20 transition-colors"><span class="iconify text-neon-pink" data-icon="mdi:github" data-width="24"></span></div><div><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">GitHub</p><a href="https://github.com/" target="_blank" class="text-sm text-gray-300 hover:text-neon-pink transition-colors">github.com/naveenkuramdasu</a></div></div></div>
+          <div class="reveal glass rounded-2xl p-6 gradient-border group"><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 transition-colors"><span class="iconify text-blue-400" data-icon="mdi:linkedin" data-width="24"></span></div><div><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">LinkedIn</p><a href="https://linkedin.com/" target="_blank" class="text-sm text-gray-300 hover:text-blue-400 transition-colors">linkedin.com/in/naveenkuramdasu</a></div></div></div>
+        </div>
+        <div class="reveal lg:col-span-3">
+          <form id="contactForm" class="glass-strong rounded-3xl p-8 gradient-border space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div><label class="block text-xs text-gray-500 uppercase tracking-wider mb-2">Your Name</label><input type="text" required placeholder="John Doe" class="form-input w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-neon-blue/50 transition-all" /></div>
+              <div><label class="block text-xs text-gray-500 uppercase tracking-wider mb-2">Your Email</label><input type="email" required placeholder="john@example.com" class="form-input w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-neon-blue/50 transition-all" /></div>
+            </div>
+            <div><label class="block text-xs text-gray-500 uppercase tracking-wider mb-2">Subject</label><input type="text" required placeholder="Project Collaboration" class="form-input w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-neon-blue/50 transition-all" /></div>
+            <div><label class="block text-xs text-gray-500 uppercase tracking-wider mb-2">Message</label><textarea rows="5" required placeholder="Tell me about your project..." class="form-input w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-neon-blue/50 transition-all resize-none"></textarea></div>
+            <button type="submit" class="magnetic-btn w-full py-4 rounded-xl text-sm font-bold text-dark-900 bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-xl hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2"><span class="iconify" data-icon="mdi:send" data-width="18"></span> Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <span class="font-display text-xl font-bold bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent">&lt;NK/&gt;</span>
+        <p class="text-sm text-gray-600 text-center">Designed & Developed with <span class="text-neon-pink">♥</span> by <span class="text-gray-400 font-semibold">Naveen Kuramdasu</span></p>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/" target="_blank" class="text-gray-600 hover:text-neon-blue transition-colors"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a>
+          <a href="https://linkedin.com/" target="_blank" class="text-gray-600 hover:text-neon-blue transition-colors"><span class="iconify" data-icon="mdi:linkedin" data-width="20"></span></a>
+          <a href="mailto:naveenkuramdasu333@gmail.com" class="text-gray-600 hover:text-neon-blue transition-colors"><span class="iconify" data-icon="mdi:gmail" data-width="20"></span></a>
+        </div>
+      </div>
+      <div class="text-center mt-8"><p class="text-xs text-gray-700">© 2025 Naveen Kuramdasu. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast fixed bottom-8 right-8 z-[10002] glass-strong rounded-2xl px-6 py-4 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center"><span class="iconify text-green-400" data-icon="mdi:check-circle" data-width="24"></span></div>
+    <div><p class="text-sm font-bold text-white">Message Sent!</p><p class="text-xs text-gray-400">I'll get back to you soon.</p></div>
+  </div>
+
+  <script>
+    // Particles
+    const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');let particles=[],mouse={x:null,y:null};
+    function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+    resizeCanvas();window.addEventListener('resize',resizeCanvas);
+    class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*1.5+.5;this.speedX=(Math.random()-.5)*.3;this.speedY=(Math.random()-.5)*.3;this.opacity=Math.random()*.5+.1}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;if(this.y<0)this.y=canvas.height;if(mouse.x!==null){const dx=this.x-mouse.x,dy=this.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){this.x+=dx*.01;this.y+=dy*.01}}}draw(){ctx.fillStyle=`rgba(0,212,255,${this.opacity})`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+    function initParticles(){particles=[];const c=Math.min(Math.floor(canvas.width*canvas.height/15000),100);for(let i=0;i<c;i++)particles.push(new Particle)}
+    initParticles();window.addEventListener('resize',initParticles);
+    function connectParticles(){for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){ctx.strokeStyle=`rgba(0,212,255,${.04*(1-d/150)})`;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke()}}}
+    function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});connectParticles();requestAnimationFrame(animateParticles)}
+    animateParticles();
+    document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+    document.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null});
+
+    // Cursor
+    const cursor=document.getElementById('cursor'),cursorDot=document.getElementById('cursorDot');let curX=0,curY=0,dotX=0,dotY=0;
+    document.addEventListener('mousemove',e=>{curX=e.clientX;curY=e.clientY});
+    function updateCursor(){dotX+=(curX-dotX)*.2;dotY+=(curY-dotY)*.2;cursorDot.style.left=dotX-3+'px';cursorDot.style.top=dotY-3+'px';cursor.style.left=curX-10+'px';cursor.style.top=curY-10+'px';requestAnimationFrame(updateCursor)}
+    updateCursor();
+    document.querySelectorAll('a,button,.magnetic-btn,.project-card,.stat-card,.exp-card,input,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'))});
+
+    // Scroll Progress
+    const scrollProgress=document.getElementById('scrollProgress');
+    window.addEventListener('scroll',()=>{const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;scrollProgress.style.transform=`scaleX(${d>0?s/d:0})`});
+
+    // Navbar
+    const navbar=document.getElementById('navbar');let lastScroll=0;
+    window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>80){navbar.classList.add('glass-strong');navbar.style.borderBottom='1px solid rgba(255,255,255,0.05)'}else{navbar.classList.remove('glass-strong');navbar.style.borderBottom='none'}navbar.style.transform=c>lastScroll&&c>400?'translateY(-100%)':'translateY(0)';lastScroll=c});
+    const sections=document.querySelectorAll('section[id]');
+    window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.id});document.querySelectorAll('.nav-link').forEach(l=>l.classList.toggle('active',l.getAttribute('href')===`#${cur}`))});
+
+    // Mobile Menu
+    const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu'),hamburgerLines=menuBtn.querySelectorAll('.hamburger-line');let menuOpen=false;
+    menuBtn.addEventListener('click',()=>{menuOpen=!menuOpen;mobileMenu.classList.toggle('open');if(menuOpen){hamburgerLines[0].style.transform='rotate(45deg) translateY(4px)';hamburgerLines[1].style.opacity='0';hamburgerLines[2].style.transform='rotate(-45deg) translateY(-4px)';hamburgerLines[2].style.width='1.5rem';document.body.style.overflow='hidden'}else{hamburgerLines.forEach(l=>{l.style.transform='';l.style.opacity='';l.style.width=''});document.body.style.overflow=''}});
+    document.querySelectorAll('.mobile-link').forEach(link=>{link.addEventListener('click',()=>{menuOpen=false;mobileMenu.classList.remove('open');hamburgerLines.forEach(l=>{l.style.transform='';l.style.opacity='';l.style.width=''});document.body.style.overflow=''})});
+
+    // Typing
+    const typingTexts=['Full Stack Developer','Fast Problem Solver','DSA Enthusiast','AI/ML Explorer'];let textIndex=0,charIndex=0,isDeleting=false;const typingEl=document.getElementById('typingText');
+    function typeEffect(){const t=typingTexts[textIndex];typingEl.textContent=isDeleting?t.substring(0,--charIndex):t.substring(0,++charIndex);let speed=isDeleting?40:80;if(!isDeleting&&charIndex===t.length){speed=2000;isDeleting=true}else if(isDeleting&&charIndex===0){isDeleting=false;textIndex=(textIndex+1)%typingTexts.length;speed=500}setTimeout(typeEffect,speed)}
+    setTimeout(typeEffect,1000);
+
+    // GSAP
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to('.hero-anim',{opacity:1,y:0,duration:1,stagger:.15,ease:'power3.out',delay:.3});
+    gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'},opacity:1,y:0,duration:.8,ease:'power3.out'})});
+    gsap.utils.toArray('.skill-progress-bar').forEach(bar=>{const w=bar.getAttribute('data-width');ScrollTrigger.create({trigger:bar,start:'top 90%',onEnter:()=>{bar.style.transform=`scaleX(${w})`;bar.classList.add('animated')}})});
+    gsap.utils.toArray('.counter').forEach(counter=>{const target=parseInt(counter.getAttribute('data-target'));ScrollTrigger.create({trigger:counter,start:'top 90%',onEnter:()=>{gsap.to(counter,{innerText:target,duration:2,snap:{innerText:1},ease:'power2.out',onUpdate(){counter.textContent=Math.ceil(parseFloat(counter.textContent))}})}})});
+
+    // Magnetic
+    document.querySelectorAll('.magnetic-btn').forEach(btn=>{btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.15}px,${(e.clientY-r.top-r.height/2)*.15}px) scale(1.02)`});btn.addEventListener('mouseleave',()=>{btn.style.transform=''})});
+
+    // Contact Form
+    document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('toast').classList.add('show');this.reset();setTimeout(()=>document.getElementById('toast').classList.remove('show'),4000)});
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'})})});
+  </script>
+</body>
+</html>
